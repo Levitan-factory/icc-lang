@@ -1,0 +1,29 @@
+{
+  "name": "icc-dsl",
+  "version": "1.04.0",
+  "private": false,
+  "type": "module",
+  "description": "ICC DSL language parser, catalog, version channels, and compatibility helpers.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Levitan-factory/icc-lang.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Levitan-factory/icc-lang/issues"
+  },
+  "homepage": "https://icc-dsl.org/",
+  "scripts": {
+    "build": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./latest": "./src/language/latest/index.ts",
+    "./channels": "./src/language/channels.ts",
+    "./deprecations": "./src/language/deprecations.ts"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.6"
+  }
+}
