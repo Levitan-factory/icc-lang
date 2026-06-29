@@ -1,0 +1,31 @@
+name: Syntax bug
+description: Report a parser, catalog, or migration issue.
+title: "[Syntax]: "
+labels: ["syntax", "bug"]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: ICC DSL version
+      placeholder: "v1.04"
+    validations:
+      required: true
+  - type: textarea
+    id: snippet
+    attributes:
+      label: ICC snippet
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
