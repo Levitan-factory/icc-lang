@@ -41,7 +41,7 @@ export const KNOWN_PROVIDERS: ProviderId[] = [
   "local",
 ];
 
-export const PROVIDER_PROFILES = ["default", "max", "ensemble", "cheap", "fast", "code", "reasoning", "flash"] as const;
+export const PROVIDER_PROFILES = ["default", "max", "cheap", "fast", "code", "reasoning", "flash"] as const;
 export const ROUTING_MODES = ["single", "parallel", "best", "ensemble", "auto", "fast", "cheap"] as const;
 export const CONDITION_OPERATORS = [">", ">=", "<", "<=", "==", "!="] as const;
 export const SUPPORTED_REFERENCE_FIELDS = [
@@ -476,8 +476,18 @@ function parseProvider(
   line: number,
   providerLookup: ProviderAliasLookup,
 ): ProviderSelection | undefined {
+  if (/^[a-zA-Z0-9_-]+\.ensemble$/i.test(raw)) {
+    diagnostics.push({
+      level: "error",
+      line,
+      message:
+        "`.ensemble` is only valid after a provider group, for example `> (openai + claude).ensemble`. Choose the ensemble merge model in workspace settings.",
+    });
+    return undefined;
+  }
+
   const providerMatch = raw.match(
-    /^([a-zA-Z0-9_-]+)(?::([a-zA-Z0-9_./:-]+))?(?:\.(max|ensemble|cheap|fast|code|reasoning|flash))?$/i,
+    /^([a-zA-Z0-9_-]+)(?::([a-zA-Z0-9_./:-]+))?(?:\.(max|cheap|fast|code|reasoning|flash))?$/i,
   );
 
   if (!providerMatch) {

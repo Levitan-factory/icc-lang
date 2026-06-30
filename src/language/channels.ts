@@ -18,7 +18,7 @@ export const ICC_LANGUAGE_CHANNELS = {
     target: "v1_04",
     version: "1.04.0",
     label: "v1.04",
-    stability: "draft-public",
+    stability: "stable",
     publicDefault: true,
     docsPath: "/reference/",
     branchPrefix: "lang/stable/",

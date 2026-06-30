@@ -81,6 +81,13 @@ describe("parseCellDsl", () => {
     expect([...max.diagnostics, ...best.diagnostics, ...ensemble.diagnostics].filter((diagnostic) => diagnostic.level === "error")).toHaveLength(0);
   });
 
+  it("rejects single-provider .ensemble routes", () => {
+    const parsed = parseCellDsl("> openai.ensemble", "Combine the answers.", options);
+
+    expect(parsed.routing).toBeUndefined();
+    expect(parsed.diagnostics.some((diagnostic) => diagnostic.message.includes("only valid after a provider group"))).toBe(true);
+  });
+
   it("rejects legacy group .max and .synthesis routes", () => {
     const groupedMax = parseCellDsl("> (openai + claude).max", "Choose the strongest answer.", options);
     const synthesis = parseCellDsl("> (openai + claude).synthesis", "Combine the answers.", options);

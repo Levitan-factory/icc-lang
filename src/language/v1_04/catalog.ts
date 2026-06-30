@@ -168,7 +168,7 @@ export const dslCatalogEntries: DslCatalogEntry[] = [
     symbol: ".profile",
     name: "Model profile",
     summary: "Selects a named provider profile from workspace settings.",
-    syntax: ["> <provider>.max", "> <provider>.ensemble", "> <provider>.cheap", "> <provider>.fast", "> <provider>.code", "> <provider>.reasoning"],
+    syntax: ["> <provider>.max", "> <provider>.cheap", "> <provider>.fast", "> <provider>.code", "> <provider>.reasoning"],
     examples: [
       { label: "Max profile", code: "> claude.max" },
       { label: "Code profile", code: "> openai.code" },
@@ -213,14 +213,13 @@ export const dslCatalogEntries: DslCatalogEntry[] = [
     symbol: ".ensemble",
     name: "Ensemble routing",
     summary: "Combines two or more model candidates into one answer.",
-    syntax: ["> (<provider> + <provider>).ensemble", "> <provider>.ensemble"],
-    examples: [
-      { label: "Default profiles", code: "> (openai + claude).ensemble" },
-      { label: "OpenRouter native fusion", code: "> openrouter.ensemble" },
+    syntax: ["> (<provider> + <provider>).ensemble"],
+    examples: [{ label: "OpenAI plus Claude", code: "> (openai + claude).ensemble" }],
+    notes: [
+      "Use `.ensemble` only after a provider group. When ICC-GO performs the merge itself, the ensemble model is selected in workspace settings.",
     ],
-    notes: ["When ICC-GO performs the merge itself, the ensemble model is selected in workspace settings."],
     since: LANGUAGE_VERSION_LABEL,
-    source: "Initial spec 7.1.6 and 7.1.7.",
+    source: "Initial spec 7.1.6, restricted to provider groups in the current public grammar.",
     parserCoverage: "parseRouting",
   },
   {

@@ -12,6 +12,7 @@ describe("latest language adapter", () => {
     expect(LATEST_LANGUAGE_VERSION).toBe(LANGUAGE_VERSION);
     expect(LATEST_LANGUAGE_VERSION_LABEL).toBe("v1.04");
     expect(PUBLIC_LANGUAGE_CHANNEL.channel).toBe("stable");
+    expect(PUBLIC_LANGUAGE_CHANNEL.stability).toBe("stable");
     expect(PUBLIC_LANGUAGE_CHANNEL.version).toBe(LATEST_LANGUAGE_VERSION);
 
     const parsed = parseCellDsl("> openai\n@text <100", "Hello %from c1", {
