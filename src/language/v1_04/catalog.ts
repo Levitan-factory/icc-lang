@@ -33,6 +33,7 @@ export interface DslCatalogGroup {
 export interface DslCatalogExample {
   label: string;
   code: string;
+  valid?: boolean;
 }
 
 export interface DslCatalogEntry {
@@ -214,7 +215,10 @@ export const dslCatalogEntries: DslCatalogEntry[] = [
     name: "Ensemble routing",
     summary: "Combines two or more model candidates into one answer.",
     syntax: ["> (<provider> + <provider>).ensemble"],
-    examples: [{ label: "OpenAI plus Claude", code: "> (openai + claude).ensemble" }],
+    examples: [
+      { label: "OpenAI plus Claude", code: "> (openai + claude).ensemble" },
+      { label: "Invalid single-provider ensemble", code: "> openai.ensemble", valid: false },
+    ],
     notes: [
       "Use `.ensemble` only after a provider group. When ICC-GO performs the merge itself, the ensemble model is selected in workspace settings.",
     ],

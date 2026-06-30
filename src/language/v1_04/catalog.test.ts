@@ -71,6 +71,20 @@ describe("dslCatalog", () => {
     SUPPORTED_FILE_EXTENSIONS.forEach((extension) => expect(fileExtension?.notes.join(" ")).toContain(extension));
   });
 
+  it("keeps ensemble routing group-only in the stable catalog", () => {
+    const modelProfile = dslCatalogEntries.find((entry) => entry.id === "model-profile");
+    const ensembleRouting = dslCatalogEntries.find((entry) => entry.id === "ensemble-routing");
+
+    expect(PROVIDER_PROFILES).not.toContain("ensemble");
+    expect(modelProfile?.syntax.join("\n")).not.toContain(".ensemble");
+    expect(ensembleRouting?.syntax).toEqual(["> (<provider> + <provider>).ensemble"]);
+    expect(ensembleRouting?.examples).toContainEqual({
+      label: "Invalid single-provider ensemble",
+      code: "> openai.ensemble",
+      valid: false,
+    });
+  });
+
   it("keeps catalog examples compatible with the current parser", () => {
     const parsed = parseCellDsl(
       [
